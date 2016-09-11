@@ -1,0 +1,82 @@
+﻿<div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" [routerLink]="['']">ML</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Šifarnici <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/vrstevrednosti']">Vrste vrednosti</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/pretnje']">Pretnje</a></li>
+                            <li><a [routerLink]="['/ranjivosti']">Ranjivosti</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/organizacioneceline']">Organizacione jedinice</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/vlasnicivrednosti']">Vlasnici vrednosti</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/intenzitetPretnji']">Intenzitet pretnji</a></li>
+                            <li><a [routerLink]="['/intenzitetRanjivosti']">Intenzitet ranjivosti</a></li>
+                        </ul>
+                    </li>
+                    <li><a [routerLink]="['/vrednosti']">Vrednosti</a></li>
+
+                    <!--Pretnje ranjivosti-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pretnje / Ranjivosti <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/pretnje']">Pretnje</a></li>
+                            <li><a [routerLink]="['/ranjivosti']">Ranjivosti</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/pretnje-ranjivosti']">Kombinacije pretnji i ranjivosti</a></li>
+                        </ul>
+                    </li>
+
+                    <!--Procena rizika-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Procena rizika <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a [routerLink]="['/procena-rizika-vrste-vrednosti']">Procena rizika za vrste vrednosti</a></li>
+                            <!--<li role="separator" class="divider"></li>-->
+                            <li><a [routerLink]="['/procena-rizika-vrednosti']">Procena rizika vrednosti</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a [routerLink]="['/mere']">Mere</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</div>

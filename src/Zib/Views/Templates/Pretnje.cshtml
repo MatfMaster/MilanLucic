@@ -1,0 +1,22 @@
+@model Pretnja
+
+<div (window:resize)="onResize($event)">
+    @* Sa svim default vrednostima *@
+    <a2b-crud-scrolltable-panel></a2b-crud-scrolltable-panel>
+
+    <a2b-panel class="col-md-6">
+        <a2b-form-horizontal>
+            <a2b-input-field for="Naziv"></a2b-input-field>
+
+            <a2b-select-field for="VrstaPretnjeId" items="vrstePretnji" text-field="text"></a2b-select-field>
+
+            <a2b-checkbox for="Poverljivost"></a2b-checkbox>
+            <a2b-checkbox for="Integritet"></a2b-checkbox>
+            <a2b-checkbox for="Raspolozivost"></a2b-checkbox>
+
+            <a2b-save-cancel-form-buttons></a2b-save-cancel-form-buttons>
+        </a2b-form-horizontal>
+    </a2b-panel>
+</div>
+
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>

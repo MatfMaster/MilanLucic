@@ -1,0 +1,131 @@
+@model Vrednost
+
+<div (window:resize)="onResize($event)" >
+    <div class="row row-margin0" >
+
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <bs-panel class="panel-body-with-table">
+                    <div class="heading">
+                        <div class="pull-right">
+                        </div>
+                        <strong>{{ treeTitle }}</strong>
+                    </div>
+                    <div class="body">
+                        <tree-scrollable-table [filter]="true"
+                                            [columns]="columns"
+                                            (rowChanged)="rowChanged($event)"
+                                            [disabled]="tableDisabled()"
+                                            treeColumn="naziv">
+                        </tree-scrollable-table>
+                    </div>
+                </bs-panel>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="col-md-12">
+
+                <div class="row"> 
+                    <bs-panel class="panel-body-with-table">
+                        <div class="heading">
+                            <div class="pull-right">
+                                <button-add (add)="dodaj()" [disabled]="tableDisabled()"></button-add>
+                                <button-delete (delete)="obrisi()" [disabled]="tableDisabled()"></button-delete>
+                            </div>
+                            <strong>{{ formTitle }}</strong>
+                        </div>
+                        <div class="body">
+                            <scrollable-table [filter]="true"
+                                            [columns]="vrednostiColumns"
+                                            (rowChanged)="rowVrednostiChanged($event)"
+                                            [disabled]="tableDisabled()"
+                                            [height]="200">
+                            </scrollable-table>
+                        </div>
+                    </bs-panel>
+                </div>
+                
+                <div class="row" class="row-separator"></div>
+            
+                <div class="row">
+
+                    <bs-panel #formPanel class="panel-body-with-form">
+                        <div class="heading">{{ formTitle }}</div>
+                        <div class="body">
+
+                            <server-error [error]="serverErrorMessage"></server-error>
+
+                            <form #forma *ngIf="!isResetting" [formGroup]="formGroup">
+                                <fieldset [disabled]="formDisabled()">
+                                    <field label="Naziv" [inputControl]="formGroup.controls.naziv">
+                                        <input type="text" formControlName="naziv" [(ngModel)]="formVrednostiRow.naziv" />
+                                    </field>
+
+                                    <field label="Opis" [inputControl]="formGroup.controls.opis">
+                                        <input type="text" formControlName="opis" [(ngModel)]="formVrednostiRow.opis" />
+                                    </field>
+
+
+
+                                    <field label="Vrsta vrednosti" [inputControl]="formGroup.controls.vrstaVrednostiId">
+                                        <ng-select [active]="formVrednostiRow.vrstaVrednostiId"
+                                                textField="naziv"
+                                                [items]="vrsteVrednosti"
+                                                formControlName="vrstaVrednostiId"
+                                                [disabled]="formDisabled()"
+                                                [(ngModel)]="formVrednostiRow.vrstaVrednostiId">
+                                        </ng-select>
+                                    </field>
+
+
+                                    <field label="Poslovna vrednost" [inputControl]="formGroup.controls.poslovnaVrednostId">
+                                        <ng-select [active]="formVrednostiRow.poslovnaVrednostId"
+                                                textField="vrednost"
+                                                [items]="poslovneVrednosti"
+                                                [(ngModel)]="formVrednostiRow.poslovnaVrednostId"
+                                                [disabled]="formDisabled()"
+                                                formControlName="poslovnaVrednostId">
+                                        </ng-select>
+                                    </field>
+
+
+                                    <field label="Organizaciona celina" [inputControl]="formGroup.controls.organizacionaCelinaId">
+                                        <ng-select [active]="formVrednostiRow.organizacionaCelinaId"
+                                                textField="naziv"
+                                                [items]="organizacioneCeline"
+                                                [(ngModel)]="formVrednostiRow.organizacionaCelinaId"
+                                                [disabled]="formDisabled()"
+                                                formControlName="organizacionaCelinaId">
+                                        </ng-select>
+                                    </field>
+
+                                    <field label="Vlasnik vrednosti" [inputControl]="formGroup.controls.vlasnikVrednostiId">
+                                        <ng-select [active]="formVrednostiRow.vlasnikVrednostiId"
+                                                textField="pime"
+                                                [items]="vlasniciVrednosti"
+                                                [(ngModel)]="formVrednostiRow.vlasnikVrednostiId"
+                                                [disabled]="formDisabled()"
+                                                formControlName="vlasnikVrednostiId">
+                                        </ng-select>
+                                    </field>
+
+                                    <form-buttons-group [submitPending]="submitPending"
+                                                        [saveDisabled]="(!inEdit && !formDirty) || (!formValid && !serverValidationError)"
+                                                        [cancelDisabled]="(!inEdit && !formDirty)"
+                                                        (save)="save()"
+                                                        (cancel)="cancelEdit()">
+                                    </form-buttons-group>
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </bs-panel>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>
+<waiting-for-modal #waitingForModal></waiting-for-modal>

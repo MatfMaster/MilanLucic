@@ -1,0 +1,3 @@
+interface IModel{
+    id: number;
+}

@@ -1,0 +1,32 @@
+.sadrzaj {
+    width:100%; 
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+}
+
+.css-td { 
+    padding-left: 5px; 
+    overflow: hidden; 
+    text-overflow: clip; 
+}
+
+.scrollable-area {
+    overflow-y: scroll; 
+    border-radius: 4px;
+}
+
+.scrollable-area:focus {
+    outline: none;
+}
+
+.css-table {
+    table-layout: fixed
+}
+
+.no-select {
+    user-select: none;
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -ms-user-select: none;
+}

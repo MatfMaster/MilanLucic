@@ -1,0 +1,72 @@
+<div class="modal" tabindex="-1" role="dialog" #modalRoot [ngClass]="{ in: isOpened, fade: isOpened }" [ngStyle]="{ display: isOpened ? 'block' : 'none' }"
+    (click)="closeOnOutsideClick ? close() : 0">
+
+    <div [class]="'modal-dialog ' + modalClass" (click)="preventClosing($event)">
+        <div class="modal-content" tabindex="0" *ngIf="isOpened">
+            <h2>Procena rizika</h2>
+            <div class="modal-header new-line" [innerHtml]="naslov">
+                <button *ngIf="!hideCloseButton" type="button" class="close" data-dismiss="modal" [attr.aria-label]="cancelButtonLabel || 'Close'"
+                    (click)="close()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formGroup" #forma>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Pre primene mera</legend>
+                                <field label="Pretnja" [inputControl]="formGroup.controls.pretnjaPre" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <ng-select textField="text" [active]="formRow.pretnjaPre" [items]="intenzitetPretnji" [(ngModel)]="formRow.pretnjaPre" formControlName="pretnjaPre">
+                                    </ng-select>
+                                </field>
+                                <field label="Ranjivost" [inputControl]="formGroup.controls.ranjivostPre" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <ng-select textField="text" [active]="formRow.ranjivostPre" [items]="intenzitetRanjivosti" [(ngModel)]="formRow.ranjivostPre"
+                                        formControlName="ranjivostPre">
+                                    </ng-select>
+                                </field>
+
+                                <field label="Rizik" [inputControl]="formGroup.controls.rizik_pre" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <input readonly type="text" formControlName="rizik_pre" [value]="rizikPrePrimeneMere" class="rizik" [class.red-font]="formRow.prihvatljivaVrednostRizika < rizikPrePrimeneMere"
+                                    />
+                                </field>
+                            </fieldset>
+                        </div>
+
+                        <div class="col-md-6">
+                            <fieldset>
+                                <legend>Posle primene mera</legend>
+
+                                <field label="Pretnja" [inputControl]="formGroup.controls.pretnjaPosle" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <ng-select textField="text" [items]="intenzitetPretnji" [active]="formRow.pretnjaPre" [(ngModel)]="formRow.pretnjaPosle"
+                                        formControlName="pretnjaPosle">
+                                    </ng-select>
+                                </field>
+                                <field label="Ranjivost" [inputControl]="formGroup.controls.ranjivostPosle" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <ng-select textField="text" [items]="intenzitetRanjivosti" [active]="formRow.pretnjaPre" [(ngModel)]="formRow.ranjivostPosle"
+                                        formControlName="ranjivostPosle">
+                                    </ng-select>
+                                </field>
+                                <field label="Rizik" [inputControl]="formGroup.controls.rizik_posle" labelWidthClass="col-md-4" fieldWidthClass="col-md-8">
+                                    <input readonly type="text" formControlName="rizik_posle" [value]="rizikPoslePrimeneMere" class="rizik" [class.red-font]="formRow.prihvatljivaVrednostRizika < rizikPoslePrimeneMere"
+                                    />
+                                </field>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" (click)="save()">
+                    <i class="fa fa-save"></i>
+                    Snimi
+                    <span *ngIf="submitPending" class="fa fa-refresh fa-spin"></span>
+                </button>
+                <!--<button-save (save)="save()"></button-save>-->
+                <button-cancel (cancel)="close()"></button-cancel>
+            </div>
+
+
+        </div>
+    </div>
+</div>

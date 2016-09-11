@@ -1,0 +1,93 @@
+@model Zib.Models.Mera
+<div (window:resize)="onResize($event)" >
+    <bs-panel class="col-md-6 panel-body-with-table">
+        <div class="heading">
+            <div class="pull-right">
+                <button-add (add)="dodaj()" [disabled]="tableDisabled()"></button-add>
+                <button-delete (delete)="obrisi()" [disabled]="tableDisabled()"></button-delete>
+            </div>
+            <h4><strong>{{ title }}</strong></h4>
+        </div>
+        <div class="body">
+            <scrollable-table [filter]="true"
+                            [columns]="columns"
+                            (rowChanged)="rowChanged($event)"
+                            [disabled]="tableDisabled()">
+            </scrollable-table>
+        </div>
+    </bs-panel>
+
+
+    <bs-panel class="col-md-6">
+        <div class="heading">Edit</div>
+        <div class="body">
+
+            <server-error [error]="serverErrorMessage"></server-error>
+
+    <!--<input [(ngModel)]="date1" name="date1" datetime-picker date-only="true" />-->
+
+            <form #forma *ngIf="!isResetting" [formGroup]="formGroup">
+                <field label="Mera" [inputControl]="formGroup.controls.naziv">
+                    <input formControlName="naziv" [(ngModel)]="formRow.naziv" />
+                </field>
+
+                <field label="Oznaka" [inputControl]="formGroup.controls.oznaka">
+                    <input formControlName="oznaka" [(ngModel)]="formRow.oznaka" />
+                </field>
+
+                <checkbox label="Grupna" [inputControl]="formGroup.controls.grupna">
+                    <input noBootstrap type="checkbox" formControlName="grupna" [(ngModel)]="formRow.grupna" />
+                </checkbox>
+
+                <checkbox label="Aktivna" [inputControl]="formGroup.controls.aktivna">
+                    <input noBootstrap type="checkbox" formControlName="aktivna" [(ngModel)]="formRow.aktivna" />
+                </checkbox>
+
+
+                <field label="Zadužen za implementaciju" [inputControl]="formGroup.controls.zaduzenZaImplementaciju">
+                    <ng-select textField="pime"
+                            [items]="zaposleni"
+                            [(ngModel)]="formRow.zaduzenZaImplementaciju"
+                            formControlName="zaduzenZaImplementaciju">
+                    </ng-select>
+                </field>
+
+                @*<field label="Rok za implementaciju" [inputControl]="formGroup.controls.rokZaImplementaciju">
+                    <input type="date" formControlName="rokZaImplementaciju" [(ngModel)]="formRow.rokZaImplementaciju" />
+                </field>*@
+
+                <field label="Rok za implementaciju" [inputControl]="formGroup.controls.rokZaImplementaciju">
+                    <input [(ngModel)]="formRow.rokZaImplementaciju" formControlName="rokZaImplementaciju" datetime-picker date-only="true" date-format="dd.mm.yyyy"/>
+                    
+                    <!--<datetime [(ngModel)]="date5" 
+                            name="rokZaImplementaciju" 
+                            [timepicker]="false" 
+                            [datepicker]="{
+                                icon: 'fa fa-calendar', 
+                                autoclose : true, 
+                                orientation : 'bottom',
+                                format: 'dd.mm.yyyy'
+                                }"
+                            >
+                    </datetime>-->
+                </field>
+
+                <field label="Status mere" [inputControl]="formGroup.controls.statusMereId">
+                    <ng-select textField="status"
+                            [items]="statusMere"
+                            [(ngModel)]="formRow.statusMereId"
+                            formControlName="statusMereId">
+                    </ng-select>
+                </field>
+
+                <form-buttons-group [submitPending]="submitPending"
+                                    [saveDisabled]="(!inEdit && !formDirty) || (!formValid && !serverValidationError)"
+                                    [cancelDisabled]="(!inEdit && !formDirty)"
+                                    (save)="save()"
+                                    (cancel)="cancel()">
+                </form-buttons-group>
+            </form>
+        </div>
+    </bs-panel>
+</div>
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>

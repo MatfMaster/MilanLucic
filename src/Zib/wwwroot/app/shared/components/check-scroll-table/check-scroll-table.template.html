@@ -1,0 +1,43 @@
+<div #checkScrollTableComponent class="sadrzaj" [style.width.px]="tableWidth">
+    <filter #filter *ngIf=(filter) (onFilterChange)="onFilterChange($event)" [disabled]="disabled"></filter>
+
+    <div class="css-table" #tabela [style.width.px]="tableProperties.widthWithoutScrollBar">
+        <div class="css-thead">
+            <div class="css-tr">
+                <template ngFor let-column [ngForOf]="columns" let-i="index">
+                    <div *ngIf="i==0" class="css-td header-style center" [style.width.px]="(tableProperties.kolone[i].columnWidth)" [style.max-width.px]="(tableProperties.kolone[i].columnWidth)">
+                        {{ column.header }}<br />
+                        <input type="checkbox" noBootstrap [(ngModel)]="prikazIzabranih" (change)="prikazIzabranihClicked()" [disabled]="disabled"
+                        />
+                    </div>
+                    <div *ngIf="i>0" class="css-td header-style center" [style.width.px]="(tableProperties.kolone[i].columnWidth)" [style.max-width.px]="(tableProperties.kolone[i].columnWidth)">
+                        {{ column.header }}
+                    </div>
+                </template>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="css-table" #tabelaBody>
+        <div #scrollableArea class="scrollable-area" [style.height.px]="tableProperties.height" [style.width.px]="tableProperties.width">
+            <div class="css-tbody">
+                <div class="css-tr" *ngFor="let row of vidljiviRedovi" [class.selected]="row.id===selectedRow?.id">
+                    <template ngFor let-column [ngForOf]="columns" let-i="index">
+                        <div *ngIf="i==0" class="css-td center" [style.width.px]="tableProperties.kolone[i].columnWidth">
+                            <input type="checkbox" noBootstrap [(ngModel)]="row[column.field]" [disabled]="disabled" (click)="checkBoxClick($event, row)"
+                            />
+
+                        </div>
+                        <div *ngIf="i>0" class="css-td left new-line no-select" (click)="rowClicked(row)" (dblclick)="doubleClickEmmiter($event)"
+                            [style.text-align]="column.alignData ? column.alignData : 'left'" [style.width.px]="tableProperties.kolone[i].columnWidth"
+                            [innerHtml]="displayField(vrednost(row, column.field))">
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

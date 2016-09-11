@@ -1,0 +1,41 @@
+@model VrstaVrednosti
+
+<div (window:resize)="onResize($event)">
+    @* Sa svim default vrednostima *@
+    <a2b-crud-tree-scrolltable-panel></a2b-crud-tree-scrolltable-panel>
+
+
+    @*<div class="col-md-6">
+        <bs-panel class="panel-body-with-table">
+            <div class="heading">
+                <div class="pull-right">
+                    <button-add (add)="dodaj()" [disabled]="tableDisabled()"></button-add>
+                    <button-delete (delete)="obrisi()" [disabled]="tableDisabled()"></button-delete>
+                </div>
+                <h4><strong>{{ title }}</strong></h4>
+            </div>
+            <div class="body">
+                <tree-scrollable-table [filter]="true"
+                                       [columns]="columns"
+                                       (rowChanged)="rowChanged($event)"
+                                       [disabled]="tableDisabled()"
+                                       treeColumn="naziv">
+                </tree-scrollable-table>
+            </div>
+        </bs-panel>
+    </div>*@
+
+    <a2b-panel class="col-md-6">
+        <a2b-form-horizontal>
+            <a2b-input-field for="Naziv"></a2b-input-field>
+            <a2b-input-field for="Opis"></a2b-input-field>
+            <a2b-select-field for="NadredjenaKategorija" items="nadredjeniSelect" text-field="naziv"></a2b-select-field>
+            <a2b-select-field for="PoslovnaVrednostId" items="poslovneVrednosti" text-field="vrednost"></a2b-select-field>
+            <a2b-select-field for="OrganizacionaCelinaId" items="organizacioneCeline" text-field="naziv"></a2b-select-field>
+
+            <a2b-save-cancel-form-buttons></a2b-save-cancel-form-buttons>
+        </a2b-form-horizontal>
+    </a2b-panel>
+</div>
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>
+

@@ -1,0 +1,69 @@
+<div (window:resize)="onResize($event)" >
+    <div class="row row-margin0" >
+        
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <bs-panel class="panel-body-with-table">
+                    <div class="heading">
+                        <strong>{{ title }}</strong>
+                    </div>
+                    <div class="body">
+                        <tree-scrollable-table #treeScrollableTable
+                                            [filter]="false"
+                                            [columns]="columns"
+                                            (rowChanged)="rowChanged($event)"
+                                            treeColumn="naziv">
+                        </tree-scrollable-table>
+                    </div>
+                </bs-panel>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="col-md-12">
+
+                <div class="row">                    
+                    <bs-panel class="panel-body-with-table">
+                        <div class="heading">
+                            <strong>Pretnje / Ranjivosti</strong>
+                        </div>
+                        <div class="body">
+                            <check-scroll-table-pretnje-ranjivosti #pretnjeRanjivosti                                                        
+                                                        [height]="250"
+                                                        ucesniciId="pretnjaRanjivostId"
+                                                        (onUcesniciChanged)="togglePretnjaRanjivost($event)"
+                                                        (rowChanged)="pretnjaRanjivostRowChanged($event)"
+                                                        (doubleClick)="editProcenaRizika($event)"
+                                                        poljaSaUcesnika="pretnjaPre,ranjivostPre,pretnjaPosle,ranjivostPosle,rizikPre,rizikPosle">
+                            </check-scroll-table-pretnje-ranjivosti>
+                        </div>
+                    </bs-panel>
+                </div>
+
+                <div class="row" class="row-separator"></div>
+
+                <div class="row">
+                    <bs-panel class="panel-body-with-table">
+                        <div class="heading">
+                            <strong>Mere</strong>
+                        </div>
+                        <div class="body">
+                            <check-scroll-table-component #mere
+                                                        [columns]="mereColumns"
+                                                        [height]="250"
+                                                        ucesniciId="id"
+                                                        (onUcesniciChanged)="togglePrimenjeneMere($event)"
+                                                        (rowChanged)="mereRowChanged($event)"
+                                                        [disabled]="mereDisabled()">
+                            </check-scroll-table-component>
+                        </div>
+                    </bs-panel>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<potvrdi-brisanje-modal #potvrdiBrisanjeModalPretnjaRanjivost (onSubmit)="potvrdjenoBrisanjePretnjeRanjivosti()" (onClose)="odustaniOdBrisanjaPretnjeRanjivosti()"></potvrdi-brisanje-modal>
+<potvrdi-brisanje-modal #potvrdiBrisanjeModalPrimenjeneMere (onSubmit)="potvrdjenoBrisanjePrimenjeneMere()" (onClose)="odustaniOdBrisanjaPrimenjeneMere()"></potvrdi-brisanje-modal>
+<procena-rizika-modal #procenaRizikaModal (onSave)="snimiProcenuRizika($event)" (onClose)="odustaniOdProceneRizika()"></procena-rizika-modal>

@@ -1,0 +1,17 @@
+@model Ranjivost
+
+<div (window:resize)="onResize($event)">
+    @*@DateTime.Now*@
+
+    <a2b-crud-scrolltable-panel></a2b-crud-scrolltable-panel>
+
+    <a2b-panel class="col-md-6">
+        <a2b-form-horizontal>
+            <a2b-input-field for="Opis"></a2b-input-field>
+
+            <a2b-save-cancel-form-buttons></a2b-save-cancel-form-buttons>
+        </a2b-form-horizontal>
+    </a2b-panel>
+
+</div>
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>

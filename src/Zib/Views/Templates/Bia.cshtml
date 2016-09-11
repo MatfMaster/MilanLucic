@@ -1,0 +1,155 @@
+<bs-panel class="col-md-6 panel-body-with-table">
+    <div class="heading">
+        <div class="pull-right">
+            <button-add (add)="dodajProcesServis()" [disabled]="tableProcesServisDisabled()"></button-add>
+            <button-delete (delete)="obrisiProcesServis()" [disabled]="tableProcesServisDisabled()"></button-delete>
+        </div>
+        <h4><strong>{{ title }}</strong></h4>
+    </div>
+    <div class="body">
+        <scrollable-table [filter]="true"
+                          [columns]="columns"
+                          (rowChanged)="rowChanged($event)"
+                          [disabled]="tableProcesServisDisabled()">
+        </scrollable-table>
+    </div>
+</bs-panel>
+
+<div class="col-md-6">
+
+    <tabset class="col-md-6">
+        <tab heading='Proces / Servis'>
+            <server-error [error]="serverErrorMessage"></server-error>
+
+            <form #formaProcesServis *ngIf="!isResettingProcesServis" [formGroup]="formGroupProcesServis">
+                <fieldset [disabled]="formProcesServisDisabled()">
+
+                    @*{{formRowProcesServis|json}}*@
+
+                    <field label="Naziv" [inputControl]="formGroupProcesServis.controls.naziv">
+                        <input type="text" formControlName="naziv" [(ngModel)]="formRowProcesServis.naziv" />
+                    </field>
+
+                    <checkbox label="Kritičan" [inputControl]="formGroupProcesServis.controls.kritican">
+                        <input noBootstrap type="checkbox" formControlName="kritican" [(ngModel)]="formRowProcesServis.kritican" />
+                    </checkbox>
+
+                    <checkbox label="Mogućnost ručnog rada" [inputControl]="formGroupProcesServis.controls.mogucnostRucnogObavljanja">
+                        <input noBootstrap type="checkbox" formControlName="mogucnostRucnogObavljanja" [(ngModel)]="formRowProcesServis.mogucnostRucnogObavljanja" />
+                    </checkbox>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <checkbox label="Finansijski gubitak" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.finansijskiGubitak">
+                                <input noBootstrap type="checkbox" formControlName="finansijskiGubitak" [(ngModel)]="formRowProcesServis.finansijskiGubitak" />
+                            </checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <field label="Finansijski gubitak iznos" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.finansijskiGubitakIznos">
+                                <input type="number" class="right-aligned-number" formControlName="finansijskiGubitakIznos" [(ngModel)]="formRowProcesServis.finansijskiGubitakIznos" />
+                            </field>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <checkbox label="Reputacioni gubitak" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.reputacioniGubitak">
+                                <input noBootstrap type="checkbox" formControlName="reputacioniGubitak" [(ngModel)]="formRowProcesServis.reputacioniGubitak" />
+                            </checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <field label="Reputacioni gubitak iznos" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.reputacioniGubitakIznos">
+                                <input type="number" class="right-aligned-number" formControlName="reputacioniGubitakIznos" [(ngModel)]="formRowProcesServis.reputacioniGubitakIznos" />
+                            </field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <checkbox label="Zakonska obaveza" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.zakonskaObaveza">
+                                <input noBootstrap type="checkbox" formControlName="zakonskaObaveza" [(ngModel)]="formRowProcesServis.zakonskaObaveza" />
+                            </checkbox>
+                        </div>
+
+                        <div class="col-md-6">
+                            <field label="Zakonska obaveza iznos" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.zakonskaObavezaIznos">
+                                <input type="number" class="right-aligned-number" formControlName="zakonskaObavezaIznos" [(ngModel)]="formRowProcesServis.zakonskaObavezaIznos" />
+                            </field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <checkbox label="Ugovorna obaveza" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.ugovornaObaveza">
+                                <input noBootstrap type="checkbox" formControlName="ugovornaObaveza" [(ngModel)]="formRowProcesServis.ugovornaObaveza" />
+                            </checkbox>
+                        </div>
+
+                        <div class="col-md-6">
+                            <field label="Ugovorna obaveza iznos" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.ugovornaObavezaIznos">
+                                <input type="number" class="right-aligned-number" formControlName="ugovornaObavezaIznos" [(ngModel)]="formRowProcesServis.ugovornaObavezaIznos" />
+                            </field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <checkbox label="Neiskorišćena prilika" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.neiskoriscenaPrilika">
+                                <input noBootstrap type="checkbox" formControlName="neiskoriscenaPrilika" [(ngModel)]="formRowProcesServis.neiskoriscenaPrilika" />
+                            </checkbox>
+                        </div>
+
+                        <div class="col-md-6">
+                            <field label="Neiskorišćena prilika iznos" labelWidthClass="col-md-6" fieldWidthClass="col-md-6" [inputControl]="formGroupProcesServis.controls.neiskoriscenaPrilikaIznos">
+                                <input type="number" class="right-aligned-number" formControlName="neiskoriscenaPrilikaIznos" [(ngModel)]="formRowProcesServis.neiskoriscenaPrilikaIznos" />
+                            </field>
+                        </div>
+                    </div>
+
+                    <field label="RTO (min)" [inputControl]="formGroupProcesServis.controls.rto">
+                        <input type="text" formControlName="rto" [(ngModel)]="formRowProcesServis.rto" />
+                    </field>
+
+
+                    <field label="RPO (min)" [inputControl]="formGroupProcesServis.controls.rpo">
+                        <input type="text" formControlName="rpo" [(ngModel)]="formRowProcesServis.rpo" />
+                    </field>
+
+                    <field label="Ciljani nivo oporavka" [inputControl]="formGroupProcesServis.controls.ciljaniNivoOporavka">
+                        <input type="text" formControlName="ciljaniNivoOporavka" [(ngModel)]="formRowProcesServis.ciljaniNivoOporavka" />
+                    </field>
+
+                    @*
+                        inEditProcesServis: {{inEditProcesServis}}<br />
+                        formDirtyProcesServis: {{formDirtyProcesServis}}<br />
+                        formValidProcesServis: {{formValidProcesServis}}<br />
+                        serverValidationErrorProcesServis: {{serverValidationErrorProcesServis}}<br />
+                    *@
+
+                    <form-buttons-group [submitPending]="submitPending"
+                                        [saveDisabled]="(!formDirtyProcesServis) || (!formValidProcesServis && !serverValidationErrorProcesServis)"
+                                        [cancelDisabled]="(!dodavanjeProcesServis && !formDirtyProcesServis)"
+                                        (save)="saveProcesServis()"
+                                        (cancel)="cancelEditProcesServis()">
+                    </form-buttons-group>
+                </fieldset>
+            </form>
+        </tab>
+
+        <tab heading='Resursi'>
+            <resursi-bia [procesServis]="procesServis">
+            </resursi-bia>
+        </tab>
+
+        <tab heading='Ljudi'>
+            <ljudi-bia [procesServis]="procesServis">
+            </ljudi-bia>
+        </tab>
+
+        <tab heading='Dobavljači'>
+            <dobavljaci-bia [procesServis]="procesServis">
+            </dobavljaci-bia>
+        </tab>
+    </tabset>
+</div>
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanjeProcesServis()"></potvrdi-brisanje-modal>

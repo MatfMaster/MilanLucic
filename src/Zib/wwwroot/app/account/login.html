@@ -1,0 +1,72 @@
+﻿
+
+<div class="ui-grid ui-grid-responsive ui-grid-pad">
+    <div class="ui-grid-row" style="padding-top: 200px;">
+        <div class="ui-grid-col-4"></div>
+        <div class="ui-grid-col-4">
+            <p-panel header="Login" class="login-panel">
+                <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" >
+                    <div class="ui-grid-row">
+
+                        <div class="form-group">
+                            <div class="ui-grid-col-4">
+                                <label for="userName" class="control-label">Korisničko ime</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input id="userName" pInputText type="text" required 
+                                       [(ngModel)]="model.userName" 
+                                       formControlName="userName" 
+                                       #userName="ngForm" 
+                                       [class.input-error]="!(userName.valid || userName.pristine)" />
+                                <div [hidden]="userName.valid || userName.pristine" class="input-error">
+                                    User Name is required
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="form-group">
+                            <div class="ui-grid-col-4">
+                                <label class="control-label">Lozinka</label>
+                            </div>
+                            <div class="ui-grid-col-8">
+                                <input id="password" type="password" pInputText  required [(ngModel)]="model.password" formControlName="password" #password="ngForm" />
+                                <div [hidden]="password.valid || password.pristine" class="alert alert-danger input-error-text">
+                                    Password is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-row">
+                        <div class="form-group">
+                            <div class="ui-grid-col-4 nevidljivo">X</div>
+                            <div class="ui-grid-col-8">
+                                <button pButton type="submit"
+                                        label="Logovanje"
+                                        [disabled]="!loginForm.form.valid">
+                                    
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </p-panel>
+        </div>
+    </div>
+</div>
+
+
+<!--<form>
+    <div class="form-group">
+        <div class="ui-grid-col-4">
+            <label class="control-label">Ime</label>
+        </div>
+        <div class="ui-grid-col-8">
+            <input type="text" class="form-control" pInputText />
+        </div>
+    </div>
+</form>-->

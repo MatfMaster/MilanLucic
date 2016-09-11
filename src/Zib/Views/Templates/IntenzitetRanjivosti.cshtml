@@ -1,0 +1,68 @@
+@model IntenzitetRanjivosti
+
+<div (window:resize)="onResize($event)">
+    @* Sa svim default vredmostima *@
+    <a2b-crud-scrolltable-panel></a2b-crud-scrolltable-panel>
+
+    <a2b-panel class="col-md-6">
+        <a2b-form-horizontal>
+            <a2b-input-field for="Naziv"></a2b-input-field>
+            <a2b-input-field for="Vrednost"></a2b-input-field>
+
+            <a2b-save-cancel-form-buttons></a2b-save-cancel-form-buttons>
+        </a2b-form-horizontal>
+    </a2b-panel>
+</div>
+
+<potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>
+
+
+@*<div (window:resize)="onResize($event)" >
+        <bs-panel class="col-md-6 panel-body-with-table">
+            <div class="heading">
+                <div class="pull-right">
+                    <button-add (add)="dodaj()" [disabled]="tableDisabled()"></button-add>
+                    <button-delete (delete)="obrisi()" [disabled]="tableDisabled()"></button-delete>
+                </div>
+                <h4><strong>{{ title }}</strong></h4>
+            </div>
+            <div class="body">
+                <scrollable-table [filter]="true"
+                                [columns]="columns"
+                                (rowChanged)="rowChanged($event)"
+                                [disabled]="tableDisabled()">
+                </scrollable-table>
+            </div>
+        </bs-panel>
+
+
+        <bs-panel class="col-md-6">
+            <div class="heading">Edit</div>
+            <div class="body">
+
+                <server-error [error]="serverErrorMessage"></server-error>
+
+                <form *ngIf="!isResetting" [formGroup]="formGroup" #forma>
+                    <fieldset [disabled]="formDisabled()">
+
+                        <field label="Naziv" [inputControl]="formGroup.controls.naziv">
+                            <input type="text" formControlName="naziv" [(ngModel)]="formRow.naziv" />
+                        </field>
+
+                        <field label="Vrednost" [inputControl]="formGroup.controls.vrednost">
+                            <input type="number" formControlName="vrednost" [(ngModel)]="formRow.vrednost" />
+                        </field>
+
+                        <form-buttons-group [submitPending]="submitPending"
+                                            [saveDisabled]="(!inEdit && !formDirty) || (!formValid && !serverValidationError)"
+                                            [cancelDisabled]="(!inEdit && !formDirty)"
+                                            (save)="save()"
+                                            (cancel)="cancel()">
+                        </form-buttons-group>
+                    </fieldset>
+                </form>
+
+            </div>
+        </bs-panel>
+    </div>
+    <potvrdi-brisanje-modal #potvrdiBrisanjeModal (onSubmit)="potvrdjenoBrisanje()"></potvrdi-brisanje-modal>*@

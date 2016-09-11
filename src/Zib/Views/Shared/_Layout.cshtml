@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href=".">
+    @*<script>document.write('<base href="' + document.location + '" />');</script>*@
+
+    <title>Procena rizika</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="~/css/bootstrap/dist/css/bootstrap.css" />
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/angular2-toaster/src/toaster.css" />
+
+    <!--<link rel="stylesheet" href="~/lib/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">-->
+
+    <link rel="stylesheet" href="/css/ng2-select.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+
+
+    <!-- 1. Load libraries -->
+    <script src="~/lib/jquery.min.js"></script>
+    <script src="~/css/bootstrap/dist/js/bootstrap.js"></script>
+
+    <!--<script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/lib/bootstrap-timepicker/js/bootstrap-timepicker.min.js "></script>    -->
+
+    <!-- Polyfill(s) for older browsers -->
+    @*<script src="lib/es6-shim.min.js"></script> rc1*@
+    <script sec="lib/core-js/client/shim.min.js"></script>
+
+    <script src="~/lib/zone.js"></script>
+    <script src="~/lib/Reflect.js"></script>
+    <script src="~/lib/system.src.js"></script>
+
+    @*<script src="~/lib/ng2-bootstrap/ng2-bootstrap.min.js"></script>*@
+
+
+    <!-- 2. Configure SystemJS -->
+    <script src="~/systemjs.config.js"></script>
+    <script>
+        System.import('app').catch(function(err) { console.error(err); });
+    </script>
+</head>
+
+<!-- 3. Display the application -->
+<body>
+    <div>
+
+        @RenderBody()
+    </div>
+
+</body>
+</html>
+
